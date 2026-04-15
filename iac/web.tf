@@ -17,3 +17,17 @@ resource "docker_container" "api" {
     external = var.api_port[terraform.workspace]
   }
 }
+
+resource "docker_container" "bd" {
+  name  = "bd-${terraform.workspace}"
+  image = "mysql:8.0"
+
+  ports {
+    internal = "3306"
+    external = var.bd_port[terraform.workspace]
+  }
+
+  env = [
+    "MYSQL_ROOT_PASSWORD=root"
+  ]
+}

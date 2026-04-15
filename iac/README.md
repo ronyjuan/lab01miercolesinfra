@@ -28,3 +28,21 @@ bd_port = {
   localhost = 4003
   dev = 5003
 }
+
+
+Construcción de imágenes
+Antes de iniciar Terraform, construir las imágenes locales:
+```bash
+docker build -t lab/api ./src/api
+docker build -t lab/web ./src/web
+
+
+cd iac
+terraform init
+terraform workspace new localhost
+terraform apply -auto-approve
+
+terraform workspace new dev
+terraform apply -auto-approve
+
+docker ps
